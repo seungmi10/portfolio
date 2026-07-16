@@ -1,0 +1,293 @@
+/* ============================================================
+   전역 스타일
+   색상 값은 data/site.ts 와 맞춰주세요
+   ============================================================ */
+
+:root {
+  --bg: #f3efeb;
+  --accent: #f3174e;
+  --text: #111111;
+  --font: "SUIT Variable", -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ============================================================
+   메인 페이지
+   ============================================================ */
+
+.main {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* 3D 캔버스 레이어 (z-index 0) */
+.canvas-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* HTML 오버레이 레이어 (z-index 1) 
+   pointer-events: none → 마우스가 통과해서 3D 회전됨
+   개별 요소만 auto 로 되살림 */
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding: 2rem;
+}
+
+.title {
+  width: min(64vw, 900px);
+  height: auto;
+  margin-top: 40vh;
+  user-select: none;
+}
+
+.menu {
+  display: flex;
+  gap: 2.5rem;
+  margin-top: 3rem;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.menu a {
+  pointer-events: auto;
+  position: relative;
+  padding: 0.25rem 0;
+  transition: color 0.2s ease;
+}
+
+.menu a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.menu a:hover {
+  color: var(--accent);
+}
+
+.menu a:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* ============================================================
+   서브 페이지 공통
+   ============================================================ */
+
+.page {
+  min-height: 100dvh;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 5rem 2rem;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4rem;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.back-link {
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.back-link:hover {
+  opacity: 1;
+}
+
+/* 카테고리 필터 */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0.4rem 0.9rem;
+  border-radius: 100px;
+  transition: all 0.2s;
+  color: var(--text);
+  opacity: 0.5;
+}
+
+.filter-btn:hover {
+  opacity: 1;
+}
+
+.filter-btn.active {
+  background: var(--text);
+  color: var(--bg);
+  opacity: 1;
+}
+
+/* 작업물 그리드 */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2.5rem 2rem;
+}
+
+.card {
+  display: block;
+  cursor: pointer;
+}
+
+.card-thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #e5e0da;
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+
+.card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .card-thumb img {
+  transform: scale(1.04);
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.card-meta {
+  font-size: 13px;
+  opacity: 0.5;
+  margin-top: 0.15rem;
+}
+
+/* 프로젝트 상세 */
+.detail-hero {
+  margin-bottom: 3rem;
+}
+
+.detail-desc {
+  max-width: 640px;
+  margin-bottom: 3rem;
+  opacity: 0.75;
+}
+
+.detail-images img {
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+
+.video-wrap {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin-bottom: 2rem;
+}
+
+.video-wrap iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.ext-link {
+  display: inline-block;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 2px;
+}
+
+/* ============================================================
+   Contact 페이지
+   ============================================================ */
+
+.contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1.1rem;
+}
+
+.contact-list a {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+  width: fit-content;
+}
+
+.contact-list a:hover {
+  border-color: currentColor;
+}
+
+/* ============================================================
+   반응형
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .title {
+    width: 85vw;
+    margin-top: 20vh;
+  }
+  .menu {
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .page {
+    padding: 3rem 1.25rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
