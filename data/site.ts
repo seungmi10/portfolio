@@ -19,10 +19,10 @@ export const site = {
 
 // ---- 3D 씬 설정 ----
 export const scene = {
-  modelPath: "/models/naiad.glb",
+  modelPath: "/models/tent-opt.glb",
 
   // 모델 위치·크기 (화면 보면서 숫자 조절)
-  modelScale: 1,
+  modelScale: 0.8,
   modelPosition: [0, 0, 0] as [number, number, number],
   modelRotation: [0, -0.3, 0] as [number, number, number],
 

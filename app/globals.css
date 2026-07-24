@@ -47,6 +47,12 @@ a {
   position: absolute;
   inset: 0;
   z-index: 0;
+  background: var(--bg);
+  isolation: isolate;
+}
+
+.canvas-layer canvas {
+  mix-blend-mode: multiply;
 }
 
 /* HTML 오버레이 레이어 (z-index 1) 
