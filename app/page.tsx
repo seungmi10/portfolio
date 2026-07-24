@@ -18,11 +18,6 @@ export default function Home() {
       <div className="overlay">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/images/title.svg" alt="Seungmi Yoon" className="title" />
-
-        <nav className="menu">
-          <Link href="/projects">Projects</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
       </div>
     </main>
   );

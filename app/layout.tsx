@@ -1,6 +1,7 @@
-import type { Metadata } from 'next';
-import { site } from '@/data/site';
-import './globals.css';
+import type { Metadata } from "next";
+import { site } from "@/data/site";
+import "./globals.css";
+import { Header } from "@/components/Header";
 
 export const metadata: Metadata = {
   title: site.name,
@@ -21,7 +22,10 @@ export default function RootLayout({
           href="https://cdn.jsdelivr.net/gh/sun-typeface/SUIT@2/fonts/variable/woff2/SUIT-Variable.css"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

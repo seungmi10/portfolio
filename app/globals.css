@@ -3,6 +3,8 @@
    색상 값은 data/site.ts 와 맞춰주세요
    ============================================================ */
 
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css");
+
 :root {
   --bg: #f3efeb;
   --accent: #f3174e;
@@ -55,6 +57,43 @@ a {
   mix-blend-mode: multiply;
 }
 
+/* 커서 */
+.main {
+  cursor:
+    url("/images/cursor1.png") 2 1,
+    default;
+}
+
+.main:active,
+.canvas-layer:active {
+  cursor:
+    url("/images/cursor2.png") 2 1,
+    grabbing;
+}
+
+.menu a {
+  cursor:
+    url("/images/cursor2.png") 2 1,
+    pointer;
+}
+
+/* 서브 페이지 */
+.page {
+  cursor:
+    url("/images/cursor1.png") 4 2,
+    default;
+}
+
+.card,
+.filter-btn,
+.back-link,
+.contact-list a,
+.ext-link {
+  cursor:
+    url("/images/cursor2.png") 4 2,
+    pointer;
+}
+
 /* HTML 오버레이 레이어 (z-index 1) 
    pointer-events: none → 마우스가 통과해서 3D 회전됨
    개별 요소만 auto 로 되살림 */
@@ -77,41 +116,52 @@ a {
   user-select: none;
 }
 
-.menu {
+/* ============================================================
+   공통 헤더
+   ============================================================ */
+
+.header {
+  position: fixed;
+  top: 20px;
+  left: 80px;
+  right: 80px;
+  z-index: 10;
   display: flex;
-  gap: 2.5rem;
-  margin-top: 3rem;
+  align-items: center;
+  pointer-events: none;
+}
+
+.header-logo {
+  pointer-events: auto;
+  flex-shrink: 0;
+}
+
+.header-logo img {
+  display: block;
+  width: 90px;
+  height: auto;
+  transition: filter 0.3s ease;
+}
+
+.header-nav {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4rem;
   font-size: 16px;
   font-weight: 500;
 }
 
-.menu a {
+.header-nav a {
   pointer-events: auto;
-  position: relative;
-  padding: 0.25rem 0;
-  transition: color 0.2s ease;
+  transition: all 0.2s ease;
+  padding: 2px 6px;
 }
 
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  height: 1px;
-  background: currentColor;
-  transform: scaleX(0);
-  transform-origin: right;
-  transition: transform 0.3s ease;
-}
-
-.menu a:hover {
-  color: var(--accent);
-}
-
-.menu a:hover::after {
-  transform: scaleX(1);
-  transform-origin: left;
+.header-nav a:hover {
+  background: var(--text);
+  color: var(--bg);
 }
 
 /* ============================================================
@@ -296,4 +346,188 @@ a {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* ============================================================
+   About 페이지
+   ============================================================ */
+
+/* 다크 배경 전환 — 헤더 색상까지 함께 반전 */
+body:has(.about) {
+  --bg: #111111;
+  --text: #ffffff;
+}
+
+.about {
+  position: relative;
+  width: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+/* --- 3단 배치 -------------------------------------------------
+   --col2 = 헤더의 'very imortant url' 시작점
+   네비가 화면 중앙 기준이라 50% + 고정 오프셋으로 맞춥니다
+   ------------------------------------------------------------ */
+.about-grid {
+  --col2: calc(50% + 46.2px);
+  --photo-w: 167px;
+  --gap: 40px;
+
+  position: relative;
+  width: 100%;
+  margin-top: 200px;
+  padding-bottom: 60px;
+}
+
+/* 1. 영문 */
+.about-en {
+  position: absolute;
+  left: 80px;
+  top: 0;
+  right: calc(100% - var(--col2) + 40px);
+  font-family: "SUIT Variable", sans-serif;
+  font-weight: 600;
+  font-size: 36px;
+  line-height: 1.35;
+  color: #555555;
+  transition: color 0.3s ease;
+}
+
+.about-en:hover {
+  color: #dbdbdb;
+}
+
+/* 2. 한글 + 링크 */
+.about-side {
+  position: absolute;
+  left: var(--col2);
+  right: calc(80px + var(--photo-w) + var(--gap));
+  top: 4px;
+}
+
+.about-ko {
+  font-family: "Pretendard Variable", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #a5a5a5;
+  transition: color 0.3s ease;
+}
+
+.about-ko:hover {
+  color: #e5e5e5;
+}
+
+/* 4. 이메일 / 인스타 */
+.about-links {
+  list-style: none;
+  margin-top: 36px;
+  font-family: "Pretendard Variable", sans-serif;
+  font-size: 16px;
+}
+
+.about-links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: #696969;
+  border-bottom: 1px solid transparent;
+  transition:
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.about-links a:hover,
+.about-links a:active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.arrow {
+  width: 12px;
+  height: 12px;
+  background-color: currentColor;
+  -webkit-mask: url("/images/arrow.svg") no-repeat center / contain;
+  mask: url("/images/arrow.svg") no-repeat center / contain;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.about-links a:hover .arrow {
+  opacity: 1;
+}
+
+/* 6. 우측 이미지 (호버 시 다음 장으로 페이드) */
+.about-photo {
+  position: absolute;
+  right: 80px;
+  top: 0;
+  width: var(--photo-w);
+  height: 208px;
+  overflow: hidden;
+}
+
+.about-photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.6s ease;
+}
+
+/* 3. 타이틀 — 메인의 .overlay / .title 과 동일 구조 */
+.about-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  padding: 2rem;
+}
+
+.about-title {
+  width: min(64vw, 900px);
+  aspect-ratio: 900 / 260; /* title.svg 실제 비율로 수정 */
+  margin-top: 40vh; /* 메인 .title 과 동일하게 */
+  pointer-events: auto;
+  background-color: var(--accent);
+  -webkit-mask: url("/images/title.svg") no-repeat center / contain;
+  mask: url("/images/title.svg") no-repeat center / contain;
+  transition: background-color 0.3s ease;
+}
+
+.about-title:hover {
+  background-color: #ffffff;
+}
+
+/* 5. 모카포트 */
+.about-moka {
+  position: absolute;
+  left: 50%;
+  bottom: 40px;
+  transform: translateX(-50%);
+  width: 72px;
+  height: 120px;
+  background-color: var(--accent);
+  -webkit-mask: url("/images/moka.svg") no-repeat center / contain;
+  mask: url("/images/moka.svg") no-repeat center / contain;
+  transition: background-color 0.3s ease;
+}
+
+.about-moka:hover {
+  background-color: #ffffff;
+}
+
+/* 현재 페이지 표시 */
+.header-nav a.is-active {
+  background: var(--accent);
+  color: #ffffff;
+}
+
+body:has(.about) .header-logo:hover img {
+  filter: brightness(0) invert(1);
 }
